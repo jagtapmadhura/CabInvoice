@@ -1,5 +1,8 @@
 package org.example;
 
+
+import java.util.List;
+
 public class CabInvoice {
     static final double COST_PER_KM = 10.0;
     static final double COST_PER_MIN = 1.0;
@@ -13,14 +16,21 @@ public class CabInvoice {
         return totalFare;
     }
 
-    public double calculateMultipleFares(double[] distances, int[] times) {
+    public double calculateMultipleFares(List<Ride> rides) {
         double totalFares = 0;
-        for(int i=0; i<distances.length; i++) {
-            totalFares += calculateFare(distances[i], times[i]);
+        for(Ride ride: rides) {
+            totalFares += calculateFare(ride.getDistance(), ride.getTime());
         }
         if(totalFares < MIN_FARE) {
             return MIN_FARE;
         }
         return totalFares;
+    }
+
+    public EnhancedInvoice enhancedInvoice(List<Ride> rides) {
+        int totalNumberOfRides = rides.size();
+        double totalFare = calculateMultipleFares(rides);
+        double averageTotalFare = totalFare/totalNumberOfRides;
+        return new EnhancedInvoice(totalNumberOfRides, averageTotalFare, averageTotalFare);
     }
 }
