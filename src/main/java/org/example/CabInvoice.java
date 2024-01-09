@@ -12,4 +12,15 @@ public class CabInvoice {
         }
         return totalFare;
     }
+
+    public double calculateMultipleFares(double[] distances, int[] times) {
+        double totalFares = 0;
+        for(int i=0; i<distances.length; i++) {
+            totalFares += calculateFare(distances[i], times[i]);
+        }
+        if(totalFares < MIN_FARE) {
+            return MIN_FARE;
+        }
+        return totalFares;
+    }
 }
