@@ -31,6 +31,6 @@ public class CabInvoice {
         int totalNumberOfRides = rides.size();
         double totalFare = calculateMultipleFares(rides);
         double averageTotalFare = totalFare/totalNumberOfRides;
-        return new EnhancedInvoice(totalNumberOfRides, averageTotalFare, averageTotalFare);
+        return new EnhancedInvoice(totalNumberOfRides, totalFare, averageTotalFare);
     }
 }
